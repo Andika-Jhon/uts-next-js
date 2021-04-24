@@ -8,27 +8,26 @@ import Pagination from '../components/pagination'
 import Sidebar from '../components/sidebar'
 import Layout from '../components/layout'
 import Menu from '../data-dummy/menu.json'
-import Post from '../data-dummy/post.json'
-export default function Home({ menu, post }) {
+export default function Search({ props }) {
   return (
-  <Layout Layoutprops = {menu}>
-  <Jumbotron />
+    
+     
+
+<Layout Layoutprops = {props.menu}>
+
 
   <div className="row">
     <div className="col-md-8">
       <h3 className="pb-4 mb-4 fst-italic border-bottom">
-        From the Firehose
-      </h3>
-      {
-        post.map(p => (
-        <Articel key ={p.id} post = {p} />
-        )
-
-        )
-      }
-      
-       <Pagination />
-
+        Search page
+    </h3>
+    <from action = "">
+        <div className= "from-group">
+            <label htmlfor="">isikan kata kunci disini</label>
+            <input type="text" className="from-control"/>
+        </div>
+    </from>
+    
     </div>
 
     <Sidebar />
@@ -36,15 +35,16 @@ export default function Home({ menu, post }) {
   </div>
 
 </Layout>
-   )
+   
+
+  
+  )
 }
-export async function getStaticProps() {
-  const req = await fetch('http://localhost:3000/api/hello')
-  const res = await req.json()
-  return {
-    props : {
-      menu : res,
-      post : Post
+Search.getInitialProps = () => {
+    return {
+      props : {
+        menu : Menu
+        
+      }
     }
   }
-}
